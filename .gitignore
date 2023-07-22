@@ -1,0 +1,10 @@
+
+*.env
+be/node_modules
+fe/node_modules
+
+*package-lock.json
+
+bus_owner.js
+state_district.js
+trips.js
