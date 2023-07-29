@@ -6,9 +6,9 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const {connection} = require("./db/connection.js")
-const triproute=require("./routes/routes.js")
+const allRoutes=require("./routes/routes.js")
 const app= express()
-const port= 8000
+const port= process.env.PORT
 
 app.use( bodyParser.urlencoded({ extended: false }) );
 app.use( bodyParser.json() );
@@ -20,7 +20,7 @@ connection();
 app.get("/",(req,res)=>{
     res.send("made with ❤️ from Anish")
 })
-app.use("/api", triproute);
+app.use("/api", allRoutes);
 
 app.listen(port,()=>{
     console.log(`server is up on :${port}`)
