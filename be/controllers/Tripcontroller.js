@@ -36,7 +36,7 @@ const getTrips = async (req, res) => {
         if (data.length === 0) {
             // if no blog found
             return res.status(200).json({
-                message:"be the first to add somthing!",
+                message:"No trip found",
                 status:200,
                 data:null
             })    
@@ -49,7 +49,7 @@ const getTrips = async (req, res) => {
     } catch (error) {
         console.log("error", error.message);
         return res.status(503).json({
-            message:"something went wrong! do",
+            message:"something went wrong!",
             status:503,
             data:{}
         })
@@ -66,7 +66,7 @@ const getTripsByDate = async (req, res) => {
         console.log(d)
         // const data = await tripModel.find({ "date": {$eq : d } })
         // const data = await tripModel.find({$eq : d })
-        const data = await tripModel.find(d)
+        const data = await tripModel.find({date:d})
         // const data = await tripModel.find({$and:[{date:{$eq:d}},{from:{$eq:f}},{to:{$eq:t}}]})
         console.log(data)
         
@@ -75,7 +75,7 @@ const getTripsByDate = async (req, res) => {
         if (data.length === 0) {
             // if no blog found
             return res.status(200).json({
-                message:"be the first to add somthing!",
+                message:"Nothing to show with this date",
                 status:200,
                 data:null
             })    
@@ -88,7 +88,7 @@ const getTripsByDate = async (req, res) => {
     } catch (error) {
         console.log("error", error.message);
         return res.status(503).json({
-            message:"something went wrong! do",
+            message:"something went wrong!",
             status:503,
             data:{}
         })
@@ -122,7 +122,7 @@ const getTripsByQuery = async (req, res) => {
         if (data.length === 0) {
             // if no blog found
             return res.status(200).json({
-                message:"be the first to add somthing!",
+                message:"Nothing to show with these parameters",
                 status:200,
                 data:null
             })    
@@ -135,7 +135,7 @@ const getTripsByQuery = async (req, res) => {
     } catch (error) {
         console.log("error", error.message);
         return res.status(503).json({
-            message:"something went wrong! do",
+            message:"something went wrong!",
             status:503,
             data:{}
         })

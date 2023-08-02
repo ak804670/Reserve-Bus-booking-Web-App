@@ -1,17 +1,23 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+const userSchema = new mongoose.Schema({
+    name: { type: String },
+    gender: { type: String },
+    age: { type: Number },
+    email: { type: String },
+    phone: { type: Number }
+  });
+
+
+
+
 // new schema for pushing trip details to the Database.
 const bookingSchema = new Schema({
-    date: { type: Date, default: Date.now },
-    from: { type: String,  default:"" },
-    to: { type: String,  default:"" },
-    startTime:{ type: String,  default:"" },
-    category: { type: String,  default:"" },
-    SeatBooked: [],
-    bus_no: { type: String,  default:"" },
-    busFare: { type: Number,  default:"" },
-    busName: { type: String,  default:"" },
+    userData:[userSchema],
+    fromTo:{From: {type:String}, To: {type:String}, Date: {type:String}},
+    selectedBusDetails:{EndTime:{type:String},busFare:{type:Number},busName:{type:String},category: {type:String},rating: {type:Number},startTime:{type:String},totalSeats:{type:Number},totalWindowSeatsAvailable:{type:Number}},
+    selectedSeats:{type:Array}
 }, { timestamps: true })
 
 // Registering the schema with mongoose model.

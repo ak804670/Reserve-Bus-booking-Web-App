@@ -2,9 +2,13 @@
 *.env
 be/node_modules
 fe/node_modules
+be/.env
+fe/.env
 
 *package-lock.json
 
+be/package-lock.json
+fe/package-lock.json
 bus_owner.js
 state_district.js
 trips.js

@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "7c43a504-feb1-4528-907b-fef6415e8be8",
+		"name": "Reserve Bus",
+		"description": "The \"**Reserve Bus API Collection**\" is a set of APIs designed to manage and retrieve **trip-related data** and **booking informations** to or from a **MongoDB Atlas** database. These APIs are built using the **ExpressJS** framework and allow developers to interact with the database to perform various operations related to trips and ticket bookings. The entire collection is built to handle **JSON data,** ensuring seamless integration with client applications.There are 5 different APIs in this collection :-\n\n1. Add New Trip - Method \"POST\"\n2. all Trip stored in Database(Last 50) - Method \"GET\"\n3. Trip by Date - Method \"GET\"\n4. Trip by Various Parameters - Method \"GET\"\n5. Add New Booking - Method \"Post\"",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26679400"
+	},
+	"item": [
+		{
+			"name": "Add New Trip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2023-07-29\",\n    \"from\": \"Bombay\",\n    \"to\": \"Goa\",\n    \"busOwnerID\":123577 ,\n    \"startTime\":\"8:00 pm\" ,\n    \"EndTime\": \"10:00 am\",\n    \"category\": \"A/C Sleeper (2+1)\",\n    \"SeatBooked\": [\"1UA\",\"3UA\"],\n    \"bus_no\": \"GA01VB1903\",\n    \"animeties_list\": [\"Live Tracking\",\"Policies\",\"Photos\",\"Amenities\",\"Reviews\"],\n    \"busFare\": \"13300\",\n    \"busName\": \"Maharashtra Bus Service\"\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/newtrip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"newtrip"
+					]
+				},
+				"description": "This is a which will accept infromation from response body and will save the Trip infromation to the MongoDB Database. Bascially when client wants to add trip details they will just fill these data and submit (post) to backend and rest will be taken care by Backend.\n\nAPI will accept below mentioned data with their respective data type :-\n\n- date(type: Date)\n- from(type: String)\n- to(type: String)\n- busOwnerID(type: String)\n- startTime(type: String)\n- EndTime(type: String)\n- category(type: String)\n- SeatBooked(type: Array)\n- bus_no(type: String)\n- animeties_list(type: Array of String )\n- busFare(type: String)\n- busName(type: String)"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All trip stored in Database(Last 50)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/gettrip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"gettrip"
+					]
+				},
+				"description": "This is a GET API which will return the last 50 Trip information which was posted to the MongoDB Database. if there are no trips in the database will return.\n\n( message:\"No trip found\",\n  status:200,\n  data:null).\n\nBasically if user wants to see the trip details from database they will be served last 50 trips which will be send them as response from backend by retriving data from database with his API."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Trip by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/gettripbydate?date=2023-07-30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"gettripbydate"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2023-07-30"
+						}
+					]
+				},
+				"description": "This is a **GET API** which will accept **date** as parameter, and search in mongoDB for data accociated with the same date and will return the Trip information from the MongoDB Database.\n\nif there are no trips with particular in the database will return.\n\n(message:\"Nothing to show with this date\",\n status:200,\n data:null).\n\nBasically if user wants to see the **trip details** as per **date** from database they will submit a query with particular data and will be served trips by searching in database and which document will have matching property, will be send them as response from backend by retriving data from database with his API."
+			},
+			"response": []
+		},
+		{
+			"name": "Trips by query",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/gettripbyquery?from=Goa&to=Daman&date=2023-07-30&startTime=8:00%20pm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"gettripbyquery"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "Goa"
+						},
+						{
+							"key": "to",
+							"value": "Daman"
+						},
+						{
+							"key": "date",
+							"value": "2023-07-30"
+						},
+						{
+							"key": "startTime",
+							"value": "8:00%20pm"
+						}
+					]
+				},
+				"description": "This is a **GET API** which will accept various **parameters**, Make a search with those parameters in mongoDB for data accociated with the same parameters and will return the Trip information from the MongoDB Database.\n\nif there are no trips with particular in the database will return.\n\n( message:\"Nothing to show with these parameters\",  \nstatus:200,  \ndata:null).\n\nBasically if user wants to see the **trip details** as per **parameters like date, to,from etc.** from database they will submit a query with particular data and will be served trips by searching in database and which document will have matching property, will be send them as response from backend by retriving data from database with his API."
+			},
+			"response": []
+		},
+		{
+			"name": "New Booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2023-07-30\",\n    \"from\": \"Goa\",\n    \"to\": \"Daman\",\n    \"startTime\":\"8:00 pm\" ,\n    \"category\": \"A/C Sleeper (2+1)\",\n    \"SeatBooked\": [{\n        \"1UA\":{\"P1\":\"Anshita\",\"age\":\"90\", \"gender\":\"Female\"}\n        },{\n        \"3UA\":{\"P1\":\"Aksh\",\"age\":\"15\", \"gender\":\"male\"}\n        }],\n    \"bus_no\": \"JK01VB1903\",\n    \"busFare\": \"13300\",\n    \"busName\": \"Interstate Bus Service\"\n   }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/newbooking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"newbooking"
+					]
+				},
+				"description": "This is a Post API which will take booking infromatoin from response body and will save to data base.  \nAPI will accept below mentioned data with their respective data type :-\n\n- date(type: Date) (example: yyyy-mm-dd)\n- from(type: String)\n- to(type: String)\n- startTime(type: String)\n- category(type: String)\n- SeatBooked(type: Array)\n- bus_no(type: String)\n- busFare(type: Number)\n- busName(type: String)"
+			},
+			"response": []
+		}
+	]
+}
